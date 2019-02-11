@@ -24,24 +24,7 @@ app.set('port', port);
 var server = http.createServer(app);
 
 // Socket 
-// var io = socket(server)
-// io.on("connection", (socket) => {
-//   console.log("Connect with: " + socket.id);
-//   socket.on("disconnect", () => { 
-//     console.log("Disconnected");
-    
-//   })
 
-//   socket.on("data", (d) =>  { 
-//     console.log("Data receive: " + d);
-//     socket.write("Hello" + d);
-//   })
-
-//   socket.on("error", (err) =>  { 
-//     console.log("error: " + err);
-    
-//   })
-//   })
   var io = require('socket.io')(server);
   io.on('connection', (socket) => {
     console.log("1 connected - {0}".format(socket.id));
