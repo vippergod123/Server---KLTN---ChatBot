@@ -9,6 +9,8 @@ var debug = require('debug')('server-chatbot:server');
 var http = require('http');
 var socket = require('socket.io');
 var format = require('string-format');
+const handleConversationFirebase = require('../function/handleConversationFirebase');
+
 format.extend(String.prototype,{});
 /**
  * Get port from environment and store in Express.
@@ -27,20 +29,43 @@ var server = http.createServer(app);
 
   var io = require('socket.io')(server);
   io.on('connection', (socket) => {
+
     console.log("1 connected - {0}".format(socket.id));
-    io.emit("Message from server: Connected success");
-    socket.on('chat message', (msg) => {
-      console.log("message from {0}: {1}".format(socket.id, msg));
-      io.emit('chat message', msg);
-    });
+
+    
+    handleConversationFirebase.createNewFirebaseConversation(socket.id)
+          .then ( message => { 
+              socket.on('chat message', (msg) => 
+              {
+                var history = new Array()
+                var botMsg = {
+                  sendAt: new Date(),
+                  text: msg,
+                  respondent: "bot"
+                }
+          
+                var userMsg = {
+                  sendAt: new Date(),
+                  text: msg,
+                  user: "Duy"
+                }
+                handleConversationFirebase.updateHistoryFirebaseConversation(userMsg,botMsg,socket.id)
+                                .then( message => { 
+                                    io.emit('chat message', msg);
+                                })
+                                .catch (err => { 
+                                    console.log("Update firebase chat - {0}".format(err.msg));
+                                })
+              })
+            })
+            .catch (err => { 
+              console.log("Create firebase chat - {0}".format(err.msg));
+            })  
 
     socket.on('disconnect', () => {
       console.log('user disconnected');
     });
 
-    socket.on('data', (d) => {
-      socket.write("Hello: " + d);
-    });
   });
 
 //

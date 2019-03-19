@@ -1,58 +1,66 @@
-// module
+//module
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var sessions = require('express-session');
+var bodyParser = require('body-parser');
+var passport = require("./models/passport");
 
-var net = require('net');
-var colors = require('colors');
-// import reference
+
+//#region setup app and middleware 
+var app = express();
+
+app.use(sessions({  
+  secret: '(!)*#(!JE)WJEqw09ej12',
+  resave: false,
+  saveUninitialized: true
+}));
 
 
-// Setup app and server 
-{
-  var app = express();
-  
-}
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
-// setup middleware
-{
+//#region setup authentication passport
+app.use(passport.initialize());
+app.use(passport.session())
+//#endregion 
+
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-}
+//#endregion
 
 //  Router 
-{
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-}
 
-// Listen socket to bot 
-{
-  // var http = require('http').Server(app);
-  // var io = require('socket.io')(http);
-  // io.on('connection', function(socket){
-  //   console.log('a user connected');
-  //   socket.on('chat message', (msg) => {
-  //     console.log('message: ' + msg);
-  //   });
-  // });
-}
+//authentication 
+var signinRouter = require('./routes/authentication/signin');
+app.use('/signin', signinRouter);
+
+var signupRouter = require('./routes/authentication/signup');
+app.use('/signup', signupRouter);
+
+var signoutRouter = require('./routes/authentication/signout');
+app.use('/signout', signoutRouter);
 
 
-// catch 404 and forward and error handler
-{
+var conversationRouter = require('./routes/conversation/conversation');
+app.use('/conversation', conversationRouter);
+
+var newsManagerRouter = require('./routes/admin/newsManager');
+app.use('/admin/manager/news', newsManagerRouter);
+
+
+//#region catch 404 and forward and error handler
+
 app.use(function(req, res, next) {
   next(createError(404));
 });
@@ -67,5 +75,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send(err);
 });
-}
+//#endregion
+
 module.exports = app;
