@@ -12,7 +12,7 @@ const mysql = require('mysql');
 
 var sql = mysql.createPool({
   sockePath     : '/cloudsql/esoteric-code-237607:asia-east1:mysql-college-handbook',
-  host: "localhost",
+  host: "35.194.253.115",
   port: 3306,
   user: "root",
   password: "",
