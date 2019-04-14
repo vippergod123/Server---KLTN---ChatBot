@@ -16,6 +16,7 @@ var sql = mysql.createPool({
   user: "root",
   password: "",
   database: "college_handbook",
+  host: "localhost",
   port: 3306,
   connectionLimit:10000,
   multipleStatements: true,
