@@ -53,7 +53,7 @@ app.use('/signout', signoutRouter);
 
 
 var conversationRouter = require('./routes/conversation/conversation');
-app.use('/conversation', conversationRouter);
+app.use('/admin/manager/conversation', conversationRouter);
 
 var newsManagerRouter = require('./routes/admin/newsManager');
 app.use('/admin/manager/news', newsManagerRouter);

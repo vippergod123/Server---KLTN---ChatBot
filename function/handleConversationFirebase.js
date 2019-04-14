@@ -2,6 +2,7 @@ const {firestore} = require('../config/firebaseConfig');
 const firestoreConversation = firestore.collection("Conversation")
 
 
+
 function updateHistoryFirebaseConversation ( userResponse, botResponse, idConversation) { 
     return new Promise((resolve,reject) =>  {
         var history = new Array()
@@ -17,13 +18,16 @@ function updateHistoryFirebaseConversation ( userResponse, botResponse, idConver
         .then(data => {
             var msg =  { 
                 status: "success",
+                message: "update firebase",
+                type: "firebase conversation"
             }
             resolve(msg) 
         })
         .catch( err => { 
             var msg =  { 
                 status: "error",
-                msg: err
+                message: err,
+                type: "firebase conversation"
             }
             reject(msg)
         })
@@ -43,13 +47,16 @@ function createNewFirebaseConversation (idConversation) {
         .then(data => {
             var msg =  { 
                 status: "success",
+                message:"Create conversation success",
+                type: "firebase conversation"
             }
             resolve(msg) 
         })
         .catch( err => { 
             var msg =  { 
                 status: "error",
-                msg: err
+                message: err,
+                type:"firebase conversation"
             }
             reject(msg)
         })
@@ -69,11 +76,52 @@ function getFirebaseConversation () {
             resolve(data)
         })
         .catch (err => { 
-            reject(err)
+            const msg = { 
+                message: err,
+                type: "firebase conversation",
+                status: "error"
+            }
+            reject(msg)
         })
+    })
+}
+
+
+function deleteFirebaseConversation (selectedConversation) { 
+    return new Promise ( (resolve, reject) =>  {
+       
+        firestoreConversation.get().then( snapshot => { 
+            var batch = firestore.batch()
+            selectedConversation.map( each => { 
+                var temp = firestoreConversation.doc(each.id)
+                batch.delete(temp)
+
+            })
+                
+            
+            return batch.commit()
+                    .then(data => {
+                        var message =  { 
+                            status: "success",
+                            type:"delete conversation",
+                            message:"delete firebase success"
+                        }
+                        resolve(message) 
+                    })
+                    .catch( err => { 
+                        var message =  { 
+                            status: "error",
+                            message: err,
+                            type:"delete conversation"
+                        }
+                        reject(message)
+                    })
+        })
+        
     })
 }
 
 module.exports.createNewFirebaseConversation = createNewFirebaseConversation
 module.exports.updateHistoryFirebaseConversation = updateHistoryFirebaseConversation
 module.exports.getFirebaseConversation = getFirebaseConversation
+module.exports.deleteFirebaseConversation = deleteFirebaseConversation

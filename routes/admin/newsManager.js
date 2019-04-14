@@ -13,11 +13,11 @@ const {isAdmin} = require('../../middleware/passportMiddleware');
 
 
 
-router.get("/get", (req,res,next) => { 
+router.get("/get",isAdmin, (req,res,next) => { 
     var  ID_article = req.query.ID
     if ( !ID_article ) { 
         res.json({ 
-            msg: "Missing required parameters - department or ID ",
+            message: "Missing required parameters - department or ID ",
             status: "error",
         }) 
     }
@@ -35,7 +35,7 @@ router.get("/get", (req,res,next) => {
         .catch( err => { 
             res.json({
                 status: "error",
-                msg: err,
+                message: err,
             })
         })
     }
@@ -43,7 +43,7 @@ router.get("/get", (req,res,next) => {
 })
 
 
-router.post("/getall", (req,res,next) => { 
+router.post("/getall",isAdmin, (req,res,next) => { 
     
     newsModel.getAllNews().then( data => {
         res.json({ 
@@ -54,7 +54,7 @@ router.post("/getall", (req,res,next) => {
     .catch( err => { 
         res.json({
             status: "error",
-            msg: err,
+            message: err,
         })
     })
 })
@@ -72,9 +72,11 @@ router.post("/article/update", (req,res,next) => {
         })
     })
     .catch ( err => { 
-        res.json({
+        
+        res.status(400).json({
             status: "error",
-            msg: err,
+            message: err,
+            type:"news update",
         })
     })
 })
@@ -95,7 +97,7 @@ router.post("/article/add", (req,res,next) => {
     .catch ( err => { 
         res.json({
             status: "error",
-            msg: err,
+            message: err,
         })
     })
 })
@@ -114,9 +116,11 @@ router.post("/article/delete", (req,res,next) => {
     .catch ( err => { 
         res.json({
             status: "error",
-            msg: err,
+            message: err,
         })
     })
 })
+   
+  
 
 module.exports = router;

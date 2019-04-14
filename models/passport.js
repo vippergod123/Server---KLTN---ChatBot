@@ -9,30 +9,20 @@ const JWTStrategy   = passportJWT.Strategy;
 
 const jsonWebTokenConfig = require('../config/jsonWebTokenConfig');
 
-var account = [ 
-  { username: "abc", password: "123"},
-  { username: "test", password: "123"},
-]
-
-var admin = [
-  { username: "admin", password: "123"},
-]
-
-
 //sua
 Passport.use(
   new LocalStrategy((username, password, done) => {
     accountModel.getAllAccount().then (account => { 
       var exist = account.find(x => x.username === username && x.password === password)
       if(!exist)
-          return done(null, false, {message: 'Incorrect email or password.'});
-      return done ( null, user = exist,{message: 'Logged In Successfully'} )
+          return done(null, false, {message: 'Bạn đã nhập sai tài khoản hoặc mật khẩu', status:"error",type:"authentication" });
+      return done ( null, user = exist,{message: 'Logged In Successfully', status:"success"} )
       
     })  
     .catch(err => { 
       console.log(err);
       
-      return done(null,false)
+      return done(null,false,{message: "Database connect ECONNREFUSED", status: "error", type:"database"})
     })    
   }
 )) 

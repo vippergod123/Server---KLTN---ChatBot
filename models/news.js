@@ -56,7 +56,7 @@ function updateArticle ( article ) {
 
         
         var query = "UPDATE news SET " +
-                    "author = '{0}', title = '{1}', department= '{2}', content = '{3}' ,create_time  = '{4}', hits = {5}, isStar = {6}, last_modified = '{7}' "
+                    "author = '{0}', title = '{1}', department= '{2}', content = '{3}' ,create_time  = '{4}', hits = {5}, is_star = {6}, last_modified = '{7}' "
                     .format(article.author,  article.title,     article.department, 
                             article.content, article.create_time,
                             article.hits,    article.isStar ? 1 : 0, article.last_modified) +
@@ -66,6 +66,9 @@ function updateArticle ( article ) {
 
         mysql.query(query.trim(), (err,data) => { 
             if( err ) {
+
+                console.log(err);
+                
                 mysqlFunction.connectionRelease()
                 reject(err)
             }

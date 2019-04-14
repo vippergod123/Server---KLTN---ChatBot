@@ -1,9 +1,13 @@
+const error_code = require('../global/error_code');
+
+
 function isLoggedin(req, res, next) {  
   console.log(req.user);
   
     if (!req.user) {
-      res.json({
-        error: "You not sign in yet!",
+      return res.status(error_code.ERROR_CODE).json({
+        status:"error",
+        message: "Bạn vẫn chưa đăng nhập!",
         redirect: "/signin",
       })
     }  
@@ -13,17 +17,20 @@ function isLoggedin(req, res, next) {
  }
 
  function isAdmin(req, res, next) {  
+  console.log(req.user);
   
     if (!req.user) {
-      res.json({
-        error: "You not sign in yet!",
+      return res.status(error_code.ERROR_CODE).json({
+        status:"error",
+        message: "Bạn vẫn chưa đăng nhập !",
         redirect: "/signin",
       }) 
     }  
     else {
       if ( req.user.role !== "admin")
-        res.json({
-          error: "You have no permission to access this page!",
+        return res.status(error_code.ERROR_CODE).json({
+          message: "Bạn không có quyền hạn để truy cập trang này",
+          status:"error",
           redirect: "/signin",
         })
       else 
