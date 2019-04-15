@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "esoteric-code-237607",
+  "private_key_id": "4265548a4bfea93433dd4d7b259908c9142f96ea",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzi/jutWJFEIjH\nvbu6r9HGWCRzQdfEibBN3vOggbCGTT17ACXSaIpgQ7dBeeNAZcUumRGC2gLU4pON\nOclB1TP8XQBTzk2iSK17lveIUHhobaOrSC3mF15JyqPO1cb4QMWhrNsyLys2zuk9\nF6azW10FGYLgSAJLM8mMMIbumv+bC8vnuZKhHTT3qC8hCpKhvx25PbKpW41A9qNo\nKM+Ex7zMqitcZODbmMKZi4yL1SoFLfB8onhPPVUcNjTdoob0pQTc7uw9mcrz14Ph\n7yYZDY4FC48jTGuR4AucbhQUSPCU4WGNXyhVcNoGutCNus+VaxBnJRY88i00QST0\nXATY0hUDAgMBAAECggEAHElgFZOEAOeC9R0CN349qWb3jyT/blpW6V3HujDUc8Q1\nfGxgiQ6pRlNEys7+K4YdE6NP6/KW4Z00q9o/x9xkDU1FoO5usrOKiV8WbmZnIeSs\nFW8QtCBYXX3MYuixKSljOX53JifiQgdFHbfdLoKlXAlR4i3WFqz5AtoeV/cZb/6e\nfx0oc5p7m3hBnejUT1ipNR+9diWxjx3aFGl0JFyy+p9f1EJcAf/i7vmpTMdstjqV\nDD1DnfnrHCguXA9PjabOwISXb8vAjMcKXmPJZDYcXvkaflFM/rc+4g61+J7+Jsl8\npPTQE0MKj/AEb9S+wSwSTTI/MFcE741ow4eYwaPuiQKBgQD4XdHxkQZLoQSefeSB\n1OoQUWOizGQt7y76f5l03kl71LJvdibOEYIlj2dz3uLSOcR1Ws8GaAGzwZNaEtlm\nnA1RXWQ7MJoYa8cINYXX8LEgcymO43KY4EAgA+0e80xC4vJz+jR5rUz5eLBgZu7+\n6Z2faHFFtV76FYpLFV3zx0SzrwKBgQC5EKt25NNEiFrKudlfK5JRRc+I4um+KXRS\nWGsKqzuZOluYAakBDXtHjXxhtVV7lMh8Ru9kPFaN/OgqmUFJ4JRrF1LBzVKZv7zM\nkPXYHNG9WwBjF+mb8qdkrtp2vqEeg5oYrlRvVKFjxCbxLywNOHbZLGjHHjgmCg1Z\noxSsAGcE7QKBgQCMcmF6PQxWUCOQjJhfYstJlvzE3tf3sb3bIbThhaIASHLu3N1s\nwjHak5Fo0K1rPAeAZW2UrdPolpqA4Q/XGn/ddvZrEjzReoD+f2XEivNe6kCh8LSp\nBoa8k/vO+L4zRKreMqrh88IHgNwcZ5jWxbzAnAsR5FJlETE27EpIxHJxOQKBgBhL\nGucJlL4rVBfGm8VFd/iZPGwQtXRUBsQEfVCyN6meooVqul+8AFHdPdWpsyX82vCN\nc0FqNkZ/S47D/XEQPQttzVxJcq1iIQuNf+g1qEa+GmfnrK/fA6BQ37a0wXu69NCG\nmejfaCwrhJ0mfxbhMaDClqKE0gQUT7pTkRQfHWblAoGANsx+iIczwaZOqG77vNA1\n5Y7q3nmUVBKDF0NMv+UXHafo+54lmq/a2DQcQksH44aU7zym1iE1SuQDWnEvNdft\nHyY6dOeICJE7wFg286QMvVjW9G5T8Ar0+ZfPbRAw2cwiVYUumQkF7crnRdnK7tM7\n6vuPxAOf7IAK3ppP6LAuHPk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "service-college-handbook@esoteric-code-237607.iam.gserviceaccount.com",
+  "client_id": "112479126043326527654",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/service-college-handbook%40esoteric-code-237607.iam.gserviceaccount.com"
+}
