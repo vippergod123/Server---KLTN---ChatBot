@@ -12,11 +12,11 @@ const mysql = require('mysql');
 
 var sql = mysql.createConnection({
   
-  host: "35.194.253.115",
-  // port:3306,
-  user: "admin",
-  password: "123",
-  database: "college_handbook",  
+  host: "remotemysql.com",
+  port:3306,
+  user: "ty7gBXAvsF",
+  password: "W5bVARU6Sl",
+  database: "ty7gBXAvsF",  
   // socketPath  : '/cloudsql/esoteric-code-237607:asia-east1:mysql-college-handbook',
   // connectionLimit:10000,
   // multipleStatements: true,
