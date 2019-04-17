@@ -7,6 +7,7 @@ function isLoggedin(req, res, next) {
     if (!req.user) {
       return res.status(error_code.ERROR_CODE).json({
         status:"error",
+        type: "authentication",
         message: "Bạn vẫn chưa đăng nhập!",
         redirect: "/signin",
       })
@@ -22,6 +23,7 @@ function isLoggedin(req, res, next) {
     if (!req.user) {
       return res.status(error_code.ERROR_CODE).json({
         status:"error",
+        type: "authentication",
         message: "Bạn vẫn chưa đăng nhập !",
         redirect: "/signin",
       }) 
@@ -30,6 +32,7 @@ function isLoggedin(req, res, next) {
       if ( req.user.role !== "admin")
         return res.status(error_code.ERROR_CODE).json({
           message: "Bạn không có quyền hạn để truy cập trang này",
+          type: "authentication",
           status:"error",
           redirect: "/signin",
         })

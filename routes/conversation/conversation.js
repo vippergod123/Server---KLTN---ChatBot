@@ -1,20 +1,30 @@
-var express = require("express")
-var router = express.Router()
-var Passport = require("passport")
+const express = require("express")
+const router = express.Router()
+const Passport = require("passport")
 // Middleware
-
 const handleConversationFirebase = require('../../function/handleConversationFirebase');
+
+// respond function 
+const respondFunction = require('../../function/respondFunction');
+
+
+const database_error = { 
+    pool: "database - error",
+    query: "database - query",
+}
+const status_code = { 
+    error: "error",
+    success:"success"
+}
 
 
 router.get("/get", (req,res,next) => { 
     handleConversationFirebase.getFirebaseConversation()
     .then( data => { 
-        res.json(data);
+        respondFunction.successStatus(res,status_code.success,"firebase conversation get", data)
     })
     .catch(error => { 
-        res.status(400).json({ 
-            error
-        })
+        respondFunction.errorStatus(res,status_code.error,"firebase conversation get",error,500)
     })
 })
 
@@ -25,15 +35,11 @@ router.post("/delete", (req,res,next) => {
     
     handleConversationFirebase.deleteFirebaseConversation(selectedConversation)
     .then( data => {
-        res.json({ 
-            data: data,
-            status: "success",
-        })
+        respondFunction.successStatus(res,status_code.success,"firebase conversation delete", data)
     })
     .catch(err => { 
-        res.status(400).json({
-            err
-        })
+        
+        respondFunction.errorStatus(res,status_code.error,"firebase conversation delete",error,500)
         
     })
     

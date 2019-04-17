@@ -1,8 +1,8 @@
-const mysql = require('../config/mysqlConfig');
+// const mysql = require('../config/mysqlConfig');
 
-function connectionRelease() {
-    mysql.on('release', function (connection) {
-    });
-  }
+// function connectionRelease() {
+//     mysql.on('release', function (connection) {
+//     });
+//   }
 
-module.exports.connectionRelease = connectionRelease
+// module.exports.connectionRelease = connectionRelease

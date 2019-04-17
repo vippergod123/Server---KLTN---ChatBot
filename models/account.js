@@ -1,18 +1,19 @@
 var mysql = require('../config/mysqlConfig');
-var mysqlFunction = require('../function/mysqlFunction');
+var pool = require('../config/postgresConfig');
 
 function getAllAccount() { 
     return new Promise((resolve,reject) => {
         var query = "Select * from account"
-        mysql.query(query, (err,data) => { 
-            if (err) { 
-                mysqlFunction.connectionRelease
+        pool.connect( (err,client,done) => { 
+            if (err) 
                 reject(err)
-            }
-            else { 
-                mysqlFunction.connectionRelease
-                resolve(data)
-            }
+            client.query(query, (err,result) => {
+                done()
+                if (err)
+                    reject(err)
+                else
+                    resolve(result.rows)
+            })
         })
     })
 }
