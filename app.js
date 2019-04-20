@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({
 //   next();
 // });
 
-var whitelist = ['http://localhost:3000', 'http://localhost:3002','https://admin-college-handbook.herokuapp.com','https://client-college-handbook.herokuapp.com']
+var whitelist = ['http://localhost:3000', 'http://localhost:3002','https://admin-college-handbook.herokuapp.com','https://client-college-handbook.herokuapp.com','https://collegehandbook074.firebaseapp.com']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
