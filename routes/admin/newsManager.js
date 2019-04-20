@@ -46,7 +46,7 @@ router.get("/get",isAdmin, (req,res,next) => {
 })
 
 
-router.post("/getall",isAdmin, (req,res,next) => { 
+router.get("/getall",isAdmin, (req,res,next) => { 
     
     newsModel.getAllNews().then(data => { 
         respondFunction.successStatus(res,status_code.success,"get all news success",data)
