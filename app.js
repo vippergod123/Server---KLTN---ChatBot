@@ -86,6 +86,7 @@ var signoutRouter = require('./routes/authentication/signout');
 app.use('/signout', signoutRouter);
 
 
+//admin 
 var conversationRouter = require('./routes/conversation/conversation');
 app.use('/admin/manager/conversation', conversationRouter);
 
@@ -94,6 +95,17 @@ app.use('/admin/manager/news', newsManagerRouter);
 
 var sendMailRouter = require('./routes/mail/sendmail');
 app.use('/sendmail', sendMailRouter);
+
+//client
+var newsRouter = require('./routes/client/news');
+app.use('/client/news', newsRouter);
+
+var postRouter = require('./routes/client/post');
+app.use('/client/post', postRouter);
+
+var commentRouter = require('./routes/client/comment_post');
+app.use('/client/comment_post', commentRouter);
+
 
 
 //#region catch 404 and forward and error handler

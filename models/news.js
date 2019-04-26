@@ -37,6 +37,7 @@ function getAllNews() {
 
 function getNewsByQuery( query ) { 
     return new Promise((resolve,reject) => {
+        
         pool.connect( (err, client, done) => {
             if (err) 
                 reject(err)
