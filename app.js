@@ -93,6 +93,9 @@ app.use('/admin/manager/conversation', conversationRouter);
 var newsManagerRouter = require('./routes/admin/newsManager');
 app.use('/admin/manager/news', newsManagerRouter);
 
+var qnaManagerRouter = require('./routes/admin/qnaManager');
+app.use('/admin/manager/qna', qnaManagerRouter);
+
 var sendMailRouter = require('./routes/mail/sendmail');
 app.use('/sendmail', sendMailRouter);
 

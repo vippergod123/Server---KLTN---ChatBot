@@ -44,6 +44,7 @@ function addPost ( post ) {
             id:  post.create_time,
             react_dislike: [],
             student:post.student,
+            isSolved:false,
         })
         .then( () => {
             resolve(null)
