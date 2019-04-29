@@ -37,6 +37,7 @@ function addPost ( post ) {
 
         postFirestore.doc(post.create_time.toString()).set({
             question: post.question,
+            title: post.title,
             create_time: post.create_time,
             comment:[],
             react_like: [],

@@ -21,7 +21,6 @@ Passport.use(
     })  
     .catch(err => { 
       console.log(err);
-      
       return done(null,false,{message: "Database connect ECONNREFUSED", status: "error", type:"database"})
     })    
   }
