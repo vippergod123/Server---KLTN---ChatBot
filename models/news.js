@@ -119,8 +119,25 @@ function deleteArticles ( articles ) {
 }
 
 
+function increaseHitsArticles ( article ) {
+    return new Promise ( (resolve,reject) => { 
+        const query = "update news set hits = hits + 1 where id = " + article.id
+        pool.connect( (err, client, done) => {
+            if (err) 
+                reject(err)
+            client.query(query  , (err,result) => { 
+                done()
+                if (err)
+                    reject(err)
+                resolve(null)
+            }) 
+        })
+    })
+}
+
 module.exports.getNewsByQuery = getNewsByQuery
 module.exports.getAllNews = getAllNews
 module.exports.updateArticle = updateArticle
 module.exports.deleteArticles = deleteArticles
 module.exports.addArticle = addArticle
+module.exports.increaseHitsArticles = increaseHitsArticles

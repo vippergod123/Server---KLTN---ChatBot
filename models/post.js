@@ -73,5 +73,19 @@ function getPostPaging(page, limit) {
 }
 
 
+function getCountQnaPost() { 
+    return new Promise( (resolve, reject) => { 
+        postFirestore.get().then ( snap => {
+            resolve(snap.size)
+        })
+        .catch( err => { 
+            console.log(err.toString());
+            reject ( err )
+        })
+    })
+}
+
+
 module.exports.addPost = addPost
 module.exports.getPostPaging = getPostPaging
+module.exports.getCountQnaPost = getCountQnaPost

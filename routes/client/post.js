@@ -32,7 +32,6 @@ router.post("/get/paging", (req,res,next) => {
                 limit: requestQuery.limit,
                 page: requestQuery.page,
                 post: post,
-                total: 10,
             } 
             console.log(data);
             
@@ -46,6 +45,18 @@ router.post("/get/paging", (req,res,next) => {
         })
     }
     
+})
+
+router.get("/get/count", (req,res,next) => { 
+    postModel.getCountQnaPost().then( data => {
+        console.log(data);
+        
+        respondFunction.successStatus(res,status_code.success,"get post count",data)
+    })
+    .catch( err => { 
+        console.log(err);
+        respondFunction.errorStatus(res,status_code.error,"get post count","Đã xảy ra lỗi",500)
+    })
 })
 
 

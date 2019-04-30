@@ -3,10 +3,8 @@ var router = express.Router()
 
 //Pool postgres
 const newsModel = require('../../models/news');
-
 //Middleware
 const {isLoggedin} = require('../../middleware/passportMiddleware');
-
 //Responde function
 const respondFunction = require('../../function/respondFunction');
 
@@ -38,7 +36,22 @@ router.post("/get/department", (req,res,next) => {
             respondFunction.errorStatus(res,status_code.error,"get news department",err,500)
         })
     }
-    
+})
+
+
+router.post("/article/hits/increase", (req,res,next) => { 
+    const  article = req.body
+    if ( !article ) { 
+        respondFunction.errorStatus(res,status_code.error,"get news department","Missing required parameters - department or ID",400)
+    }
+    else {
+        newsModel.increaseHitsArticles(article).then( data => {
+            respondFunction.successStatus(res,status_code.success,"update hits by article ",data)
+        })
+        .catch( err => { 
+            respondFunction.errorStatus(res,status_code.error,"update hits by article",err,500)
+        })
+    }
 })
 
 
