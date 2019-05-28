@@ -135,9 +135,50 @@ function increaseHitsArticles ( article ) {
     })
 }
 
+function addNewsFromHCMUS (articles){ 
+    return new Promise( (resolve, reject) => {
+        // const query = "Insert into news(author, title ,department, content, create_time, last_modified) " +
+        //             "values ('{0}','{1}','{2}','{3}','{4}', '{5}') "
+        //             .format(article.author,  article.title,  article.department, 
+        //                     article.content, article.create_time, article.last_modified)
+        
+        articles.forEach(each => {
+            console.log(each.create_time);
+            
+            const query =   "DO \n" +
+                            "$do$ \n" +
+                            "BEGIN \n" +
+                            "IF {0} > ((select max(create_time)  from news)::bigint) THEN \n".format(each.create_time) +
+                            "insert into news (author, title ,department, content, create_time, last_modified) \n" +
+                            "values ('{0}','{1}','{2}','{3}','{4}', '{5}'); \n"
+                            .format(each.author,  each.title,  each.department, 
+                                each.content, each.create_time, each.last_modified) + 
+                            "END IF; \n" +
+                            "END \n" +
+                            "$do$ \n"
+
+                                
+            pool.connect( (err, client, done) => {
+                if (err) 
+                    reject(err)
+                client.query(query, (err,result) => { 
+                    done()
+                    
+                    if (err)
+                        reject(err)
+                    resolve(null)
+                }) 
+            })    
+        });
+        
+    })
+}
+
 module.exports.getNewsByQuery = getNewsByQuery
 module.exports.getAllNews = getAllNews
 module.exports.updateArticle = updateArticle
 module.exports.deleteArticles = deleteArticles
 module.exports.addArticle = addArticle
 module.exports.increaseHitsArticles = increaseHitsArticles
+module.exports.addNewsFromHCMUS = addNewsFromHCMUS
+

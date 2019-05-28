@@ -30,19 +30,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-// app.use(function(req, res, next) {
-//   var allowedOrigins = ['http://localhost:3000','http://localhost:3002'];
-//   var origin = req.headers.origin;
-//   console.log(origin);
-  
-//   if(allowedOrigins.indexOf(origin) > -1){
-//        res.header('Access-Control-Allow-Origin', origin);
-//   }
-//   // res.header("Access-Control-Allow-Origin", "http://localhost:3000,http://localhost:3000");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   res.header("Access-Control-Allow-Credentials", "true" );
-//   next();
-// });
+//#region cors
 
 var whitelist = ['http://localhost:3000', 'http://localhost:3002','https://admin-college-handbook.herokuapp.com','https://client-college-handbook.herokuapp.com','https://collegehandbook074.firebaseapp.com']
 var corsOptions = {
@@ -58,6 +46,8 @@ var corsOptions = {
 }
 
 app.use('/*',cors(corsOptions))
+
+//#endregion 
 
 
 //#region setup authentication passport
@@ -86,12 +76,19 @@ var signoutRouter = require('./routes/authentication/signout');
 app.use('/signout', signoutRouter);
 
 
+//bot
+var botRouter = require('./routes/bot/bot');
+app.use('/bot', botRouter);
+
 //admin 
 var conversationRouter = require('./routes/conversation/conversation');
 app.use('/admin/manager/conversation', conversationRouter);
 
 var newsManagerRouter = require('./routes/admin/newsManager');
 app.use('/admin/manager/news', newsManagerRouter);
+
+var reportManager = require('./routes/admin/reportManager');
+app.use('/admin/manager/report', reportManager);
 
 var qnaManagerRouter = require('./routes/admin/qnaManager');
 app.use('/admin/manager/qna', qnaManagerRouter);
@@ -106,8 +103,14 @@ app.use('/client/news', newsRouter);
 var postRouter = require('./routes/client/post');
 app.use('/client/post', postRouter);
 
+var reportRouter = require('./routes/client/report');
+app.use('/client/report', reportRouter);
+
 var commentRouter = require('./routes/client/comment_post');
 app.use('/client/comment_post', commentRouter);
+
+var hcmusRouter = require('./routes/client/hcmus');
+app.use('/client/hcmus', hcmusRouter);
 
 
 

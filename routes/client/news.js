@@ -7,6 +7,8 @@ const newsModel = require('../../models/news');
 const {isLoggedin} = require('../../middleware/passportMiddleware');
 //Responde function
 const respondFunction = require('../../function/respondFunction');
+//
+const handleGetDataFromHCMUS = require('../../function/handleGetDataFromHCMUS');
 
 const database_error = { 
     pool: "database - error",
@@ -16,6 +18,9 @@ const status_code = {
     error: "error",
     success:"success"
 }
+
+const day = 86400 * 1000
+
 
 router.post("/get/department", (req,res,next) => { 
     const  alias = req.body.alias
@@ -33,6 +38,8 @@ router.post("/get/department", (req,res,next) => {
             respondFunction.successStatus(res,status_code.success,"get news by id ",data)
         })
         .catch( err => { 
+            console.log(err);
+            
             respondFunction.errorStatus(res,status_code.error,"get news department",err,500)
         })
     }
@@ -55,5 +62,34 @@ router.post("/article/hits/increase", (req,res,next) => {
 })
 
 
+
+
+
+var listArticles = []
+
+
+
+handleGetDataFromHCMUS.getNews()
+.then( data => { 
+    console.log("fetch from hcmus succes");
+    listArticles = data
+    listArticles.sort(function(a, b) {
+        return a.create_time - b.create_time;
+    });
+})
+.catch (err => { 
+    console.log(err);
+})
+
+router.get("/hcmus", (req,res,next) => { 
+    handleGetDataFromHCMUS.getNews()
+    .then( data => {
+        newsModel.addNewsFromHCMUS(listArticles)
+        res.send(listArticles[1].content)
+    })
+    .catch(err => { 
+        respondFunction.errorStatus(res,status_code.error,"get news hcmus",err,500)
+    })
+})
 
 module.exports = router;
