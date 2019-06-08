@@ -113,6 +113,9 @@ var hcmusRouter = require('./routes/client/hcmus');
 app.use('/client/hcmus', hcmusRouter);
 
 
+var searchRouter = require('./routes/search-engine/search');
+app.use('/search', searchRouter);
+
 
 //#region catch 404 and forward and error handler
 

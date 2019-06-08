@@ -15,10 +15,10 @@ var transporter = nodemailer.createTransport({
 });
 
 var mailOptions = {
-  from: "",
-  to: "duytruong7297@gmail.com",
+  from: "duytruong7297@gmail.com",
+  to: "stsv.hcmus@gmail.com",
   subject: "",
-  text: "",
+  html:"",
 };
 
 const status_code = { 
@@ -39,9 +39,14 @@ router.post("/", (req,res,next) => {
 
     console.log(mail);
     
-    mailOptions.from = mail.from
-    mailOptions.subject = mail.subject
-    mailOptions.text = mail.content    
+    const html =    '<h2>Mail from: {0} - {1}</h2>'.format(mail.name, mail.from) +
+                    '<h4>{0}</h4>'.format(mail.content) 
+
+
+    mailOptions.subject = '[HCMUS - Sổ tay sinh viên] - {0}'.format(mail.subject)
+    mailOptions.html = html 
+    
+    console.log(mailOptions);
 
     if ( validateEmail(mailOptions.from) && mailOptions.subject) {
         transporter.sendMail(mailOptions, (error, info) => {

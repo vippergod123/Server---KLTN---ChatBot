@@ -31,35 +31,6 @@ Passport.serializeUser((user, done) => {
   done(null, user)
 })
 Passport.deserializeUser((id,done) => {
-    // Ma hoa private key here 
-//   var myVar = "ID";
-//   var params = {};
-//   params[myVar] = id;
-//   MongoClient.connect(uri, function(err, db) {
-//     if (err) throw err;
-//     if (id[0] != 's') {
-//       var dbo = db.db("3dwebsite");
-//       dbo.collection("customer").find(params).toArray(function(err, result) {
-//         var bytes = crypto.AES.decrypt(result[0].password,'dudada');
-//         pass = bytes.toString(crypto.enc.Utf8);
-//         result[0].password = pass;
-//         pass = null;
-//         done(err, result[0]);
-//       });
-//     } else if (id[0] == 's') {
-//       var dbo = db.db("3dwebsite");
-//       dbo.collection("staff").find(params).toArray(function(err, result) {
-//         var bytes = crypto.AES.decrypt(result[0].password,'dudada');
-//         pass = bytes.toString(crypto.enc.Utf8);
-//         result[0].password = pass;
-//         pass = null;
-//         done(err, result[0]);
-
-//       });
-//     }
-//     db.close();
-//   });
-
     done(null,id)
 });
 
