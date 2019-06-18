@@ -22,7 +22,7 @@ const status_code = {
     success:"success"
 }
 
-router.get("/get", (req,res,next) => { 
+router.get("/get",isAdmin,(req,res,next) => { 
     
     qnaModel.getQnAFirebase().then( data => {
         respondFunction.successStatus(res,status_code.success,"get post",data)
@@ -34,7 +34,7 @@ router.get("/get", (req,res,next) => {
 })
 
 
-router.post("/delete", (req,res,next) => { 
+router.post("/delete",isAdmin, (req,res,next) => { 
 
     var selectedPost = req.body
     console.log(selectedPost);
@@ -57,7 +57,7 @@ router.post("/delete", (req,res,next) => {
 
 
 
-router.post("/get/id", (req,res,next) => { 
+router.post("/get/id",isAdmin, (req,res,next) => { 
 
     var {id} = req.body
     console.log(id);

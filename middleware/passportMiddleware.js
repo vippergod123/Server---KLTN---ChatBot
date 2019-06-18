@@ -18,7 +18,7 @@ function isLoggedin(req, res, next) {
  }
 
  function isAdmin(req, res, next) {  
-  console.log(req.user);
+  console.log("middleware isAdmin:" +req.user);
   
     if (!req.user) {
       return res.status(error_code.ERROR_CODE).json({

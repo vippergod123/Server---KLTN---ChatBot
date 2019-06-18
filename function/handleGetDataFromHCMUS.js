@@ -98,18 +98,16 @@ function getNews(){
             if (!error && response.statusCode == 200) {
                 var $ = cheerio.load(html)
                  
-                $('.sppb-article-info-wrap').map((i, card) => {
-                    
-                    const title = $(card).find('a').text()
-                    const linkHtml = $(card).find('a').attr("href")
-                    var article = {
-                        title,
-                        linkHtml,
-                        content: null,
-                    }
-                    // console.log(articleLink);
-                    listArticles.push(article)
-                })
+                    $('.sppb-article-info-wrap').map((i, card) => {
+                        const title = $(card).find('a').text()
+                        const linkHtml = $(card).find('a').attr("href")
+                        var article = {
+                            title,
+                            linkHtml,
+                            content: null,
+                        }
+                        listArticles.push(article)
+                    })
 
                 getContentArticles(listArticles)
                 setTimeout( () => {
@@ -135,7 +133,6 @@ function getNews(){
                                 const titleExcel = main(this).text()
                                 const excel = {linkExcel, titleExcel}
                                 each['excel'] = excel
-                                
                             });
                         }
                         resolve()
@@ -154,18 +151,9 @@ function getSubjectSchedule() {
                 var $ = cheerio.load(html)
                     
                 $('.sppb-addon-content li').map((i, card) => {
-                    
                     const title = $(card).find('a').text()
                     const linkHtml = "https://www.hcmus.edu.vn/" + $(card).find('a').attr("href")
-                    // var article = {
-                    //     title,
-                    //     linkHtml,
-                    //     content: null,
-        
-                    // }
-                    // console.log(articleLink);
                     const temp = linkHtml.toLowerCase()
-                    
                     
                     if ( temp.includes("thoi-khoa-bieu") && temp.includes("hk")) { 
                         const subjectSchedule = {

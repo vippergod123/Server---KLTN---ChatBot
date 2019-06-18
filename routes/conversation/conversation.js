@@ -3,7 +3,7 @@ const router = express.Router()
 const Passport = require("passport")
 // Middleware
 const handleConversationFirebase = require('../../function/handleConversationFirebase');
-
+const {isLoggedin, isAdmin} = require('../../middleware/passportMiddleware');
 // respond function 
 const respondFunction = require('../../function/respondFunction');
 
@@ -18,7 +18,7 @@ const status_code = {
 }
 
 
-router.get("/get", (req,res,next) => { 
+router.get("/get",isAdmin, (req,res,next) => { 
     handleConversationFirebase.getFirebaseConversation()
     .then( data => { 
         respondFunction.successStatus(res,status_code.success,"firebase conversation get", data)

@@ -6,7 +6,7 @@ var router = express.Router()
 const reportModel = require('../../models/report');
 
 //Middleware
-const {isLoggedin} = require('../../middleware/passportMiddleware');
+const {isLoggedin, isAdmin} = require('../../middleware/passportMiddleware');
 
 //Responde function
 const respondFunction = require('../../function/respondFunction');
@@ -19,7 +19,7 @@ const status_code = {
 
 
 
-router.get("/get", (req,res,next) => { 
+router.get("/get", isAdmin,(req,res,next) => { 
     const query = "Select * from report"
     console.log(query);
     

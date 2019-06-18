@@ -75,13 +75,34 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function getResponseFromPython(msg) {
+    return new Promise( (resolve, reject) => { 
+        // const api = "https://chat-bot-college-handbook.herokuapp.com/bot";
+        const api = "http://localhost:5000/bot";
+        console.log(api);
+        console.log(msg);
+        
+        axios.default.post(api, {
+            message: msg
+        })
+        .then( res => { 
+            const message = res.data.answer
+            console.log();
+            
+            resolve(message)
+        })
+        .catch( err => { 
+            reject(err)
+        })
+    })
+}
 
-router.post("/:idCoversation", (req,res,next) => { 
-    const params = req.params
-    console.log(params);
+router.post("/", (req,res,next) => { 
     const msg = req.body.message
+    console.log(msg);
     
-    getResponseFromBot(msg)
+    // getResponseFromBot(msg)
+    getResponseFromPython(msg)
     .then( response => { 
         respondFunction.successStatus(res,status_code.success,"bot response",response)
     })
@@ -90,8 +111,22 @@ router.post("/:idCoversation", (req,res,next) => {
         respondFunction.errorStatus(res,status_code.error,"bot response",err.toString(),500)
     })
 })
-   
 
-  
+// const api = "https://chat-bot-college-handbook.herokuapp.com/bot";
+//         console.log(api);
+        
+//         axios.default.post(api, {
+//             message: "hello"
+//         })
+//         .then( res => { 
+//             const message = res.data.answer
+//             console.log(message);
+            
+//         })
+//         .catch( err => { 
+//             console.log(err);
+            
+//             reject(err)
+//         })
 
 module.exports = router;

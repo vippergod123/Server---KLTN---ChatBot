@@ -30,6 +30,8 @@ Passport.use(
 Passport.serializeUser((user, done) => {
   done(null, user)
 })
+
+
 Passport.deserializeUser((id,done) => {
     done(null,id)
 });
