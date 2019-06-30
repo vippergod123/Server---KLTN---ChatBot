@@ -27,7 +27,7 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "morgan": "~1.9.0",
-    "mysql": "^2.16.0",
+    "mysql": "^2.17.1",
     "net": "^1.0.2",
     "node-rest-client": "^3.1.0",
     "node-wit": "^5.0.0",

@@ -77,8 +77,8 @@ function getRandomInt(min, max) {
 
 function getResponseFromPython(msg) {
     return new Promise( (resolve, reject) => { 
-        // const api = "https://chat-bot-college-handbook.herokuapp.com/bot";
-        const api = "http://localhost:5000/bot";
+        const api = "https://chat-bot-college-handbook.herokuapp.com/bot";
+        // const api = "http://localhost:5000/bot";
         console.log(api);
         console.log(msg);
         
